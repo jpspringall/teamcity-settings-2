@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -37,6 +38,7 @@ object TeamcitySettings_Build : BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+        root(TeamcitySettingsReadonlySettings)
     }
 
     triggers {
@@ -47,5 +49,16 @@ object TeamcitySettings_Build : BuildType({
     features {
         perfmon {
         }
+    }
+})
+
+object TeamcitySettingsReadonlySettings : GitVcsRoot({
+    name = "Teamcity Settings Readonly Settings"
+    url = "https://github.com/jpspringall/teamcity-settings"
+    branch = "refs/heads/main"
+    branchSpec = "refs/heads/*"
+    authMethod = password {
+        userName = "jpspringall"
+        password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
     }
 })
