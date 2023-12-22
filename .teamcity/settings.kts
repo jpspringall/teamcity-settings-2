@@ -28,7 +28,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.11"
 
 project {
-
+    vcsRoot(TeamcitySettingsReadonlySettings)
     buildType(TeamcitySettings_Build)
 }
 
@@ -37,8 +37,9 @@ object TeamcitySettings_Build : BuildType({
     name = "Build"
 
     vcs {
-        root(DslContext.settingsRoot)
         root(TeamcitySettingsReadonlySettings)
+        cleanCheckout = true
+        excludeDefaultBranchChanges = true
     }
 
     triggers {
