@@ -28,7 +28,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.11"
 
 project {
-    vcsRoot(TeamcitySettingsReadonlySettings)
     buildType(TeamcitySettings_Build)
 }
 
@@ -37,7 +36,7 @@ object TeamcitySettings_Build : BuildType({
     name = "Build"
 
     vcs {
-        root(TeamcitySettingsReadonlySettings)
+        DslContext.settingsRoot.id
         cleanCheckout = true
         excludeDefaultBranchChanges = true
     }
@@ -50,16 +49,5 @@ object TeamcitySettings_Build : BuildType({
     features {
         perfmon {
         }
-    }
-})
-
-object TeamcitySettingsReadonlySettings : GitVcsRoot({
-    name = "Teamcity Settings Readonly Settings"
-    url = "https://github.com/jpspringall/teamcity-settings"
-    branch = "refs/heads/main"
-    branchSpec = "refs/heads/*"
-    authMethod = password {
-        userName = "jpspringall"
-        password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
     }
 })
