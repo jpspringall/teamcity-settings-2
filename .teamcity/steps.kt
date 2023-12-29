@@ -15,7 +15,6 @@ object CommonSteps {
                 name = "Settings 2 Print Pull Request Number"
                 scriptContent = """
                 #!/bin/bash
-                id=%teamcity.pullRequest.number%
                 echo "Id is: ${'$'}id"
                 branch="pull/${'$'}id"
                 echo "Branch is: ${'$'}branch"

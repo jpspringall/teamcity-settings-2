@@ -106,7 +106,7 @@ object PullRequestBuild : BuildType({
 object TeamcityBuildVcs : GitVcsRoot({
     name = "Teamcity Build"
     url = "https://github.com/jpspringall/teamcity-settings-2"
-    branch = "refs/heads/master"
+    branch = "refs/heads/main"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {
