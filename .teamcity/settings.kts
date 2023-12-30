@@ -1,4 +1,5 @@
 
+import CommonSteps.createParameters
 import CommonSteps.printPullRequestNumber
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.Project
@@ -51,9 +52,8 @@ object Build : BuildType({
         excludeDefaultBranchChanges = true
     }
 
-    params {
-        param("git.branch.specification", "")
-    }
+    createParameters("")
+
     printPullRequestNumber()
 
     triggers {
@@ -72,10 +72,7 @@ object PullRequestBuild : BuildType({
         cleanCheckout = true
         excludeDefaultBranchChanges = true
     }
-
-    params {
-        param("git.branch.specification", "+:refs/pull/*/merge")
-    }
+        createParameters( "+:refs/pull/*/merge")
 
     printPullRequestNumber()
 
@@ -107,6 +104,7 @@ object TeamcityBuildVcs : GitVcsRoot({
     name = "Teamcity Build"
     url = "https://github.com/jpspringall/teamcity-settings-2"
     branch = "refs/heads/main"
+    branchSpec = "%git.branch.specification%"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {

@@ -8,6 +8,14 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
 object CommonSteps {
 
+    fun BuildType.createParameters(gitBranchSpecification:String) {
+        params {
+            param("git.branch.specification", gitBranchSpecification)
+            param("teamcity.pullRequest.number", "")
+            param("teamcity.git.fetchAllHeads", "true")
+        }
+    }
+
     fun BuildType.printPullRequestNumber(
     ) {
         steps {
